@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="keywords" content="Calculator Differentiation Rules derivation partial derivatives calculus gradient Factor rule Sum rule chain examples calculator math elsenaju " />
+    <meta name="description" content="Calculator for derivative, partial derivative and 3d gradient of a function f." />
+    <meta name="author" content="Juergen Brandes" />
+    <meta name="robots" content="all" />
+    <title>Online Derivative Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body onLoad="ok();">
+    <div id="MasterMitte">
+        <div class="box-2">
+            <h1>Derivative Calculator
+            </h1>
+            <h2>Partial Derivative Calculator</h2>
+            <p>The derivative calculator calculates the derivative or partial derivative of a function f. Additional the calculator computes the gradient in 3d.</p>
+            <div id="Ableitung" class="table" style="overflow: auto; width:100%;">
+            </div>
+            <p>Input field for the function to be derived. With 'ok' the entered function is accepted. With &part;/&part;... the corresponding derivatives can be formed. Multiple application leads in each case to the derivative of the predecessor function.</p>
+            <div class="grid-funktionen">
+                <div class="itemfkt2">
+                    <p class="FormelBoxCLi">f(...) =</p>
+                </div>
+                <div class="itemfkt3"><textarea type="text" id="odeinputf" rows="2" class="txtArea" onclick="setCheckbox(0)">(mu*sin(pi*x)+c*y^3-z^2)/cos(y)</textarea></div>
+            </div>
+            <div class="grid-rechner">
+                <div class="itemcl" style="grid-column: span 2;" onClick="insRechner('',0)">cl</div>
+                <div class="itemok" style="grid-column: span 2;" onClick="ok()">ok</div>
+                <div class="itemBlank"></div>
+                <div class="itemBlank"></div>
+                <div class="itemBlank"></div>
+                <div class="item1" onClick="insRechner('',2)">Pos1</div>
+                <div class="item1" onClick="insRechner('',1)">End</div>
+
+                <div class="item2" onClick="doIt('x', 0)"><span class="frac"><sup>d<sup>n</sup></sup> <span>/</span> <sub>dx<sup>n</sup></sub></span>
+                </div>
+                <div class="item2" onClick="doIt('x', 1)"><span class="frac"><sup>&part;<sup>n</sup></sup> <span>/</span> <sub>&part;x<sup>n</sup></sub></span>
+                </div>
+                <div class="item2" onClick="doIt('y', 1)"><span class="frac"><sup>&part;<sup>n</sup></sup> <span>/</span> <sub>&part;y<sup>n</sup></sub></span>
+                </div>
+                <div class="item2" onClick="doIt('z', 1)"><span class="frac"><sup>&part;<sup>n</sup></sup> <span>/</span> <sub>&part;z<sup>n</sup></sub></span>
+                </div>
+                <div class="item1" onClick="doIt('x', 2)">grad(f) &#x2207;f</div>
+
+                <div class="item1" onClick="insRechner('7',3)">7</div>
+                <div class="item1" onClick="insRechner('8',3)">8</div>
+                <div class="item1" onClick="insRechner('9',3)">9</div>
+                <div class="itemBlank"></div>
+                <div class="item1" onClick="insRechner('../index.html',3)">/</div>
+                <div class="item1" onClick="insRechner('Delta',3)">&Delta;</div>
+                <div class="item1" onClick="insRechner('x',3)">x</div>
+                <div class="item1" onClick="insRechner('y',3)">y</div>
+                <div class="item1" onClick="insRechner('z',3)">z</div>
+
+                <div class="item1" onClick="insRechner('4',3)">4</div>
+                <div class="item1" onClick="insRechner('5',3)">5</div>
+                <div class="item1" onClick="insRechner('6',3)">6</div>
+                <div class="itemBlank"></div>
+                <div class="item1" onClick="insRechner('*',3)">*</div>
+                <div class="item1" onClick="insRechner('Omega',3)">&Omega;</div>
+                <div class="item1" onClick="insRechner('a',3)">a</div>
+                <div class="item1" onClick="insRechner('b',3)">b</div>
+                <div class="item1" onClick="insRechner('c',3)">c</div>
+
+                <div class="item1" onClick="insRechner('1',3)">1</div>
+                <div class="item1" onClick="insRechner('2',3)">2</div>
+                <div class="item1" onClick="insRechner('3',3)">3</div>
+                <div class="itemBlank"></div>
+                <div class="item1" onClick="insRechner('-',3)">-</div>
+                <div class="item1" onClick="insRechner('mu',3)">&mu;</div>
+                <div class="item1" onClick="insRechner('pi',3)">&pi;</div>
+                <div class="item1" onClick="insRechner('(',3)">(</div>
+                <div class="item1" onClick="insRechner(')',3)">)</div>
+
+                <div class="item1" onClick="insRechner('0',3)">0</div>
+                <div class="item1" onClick="insRechner('.',3)">.</div>
+                <div class="itemBlank"></div>
+                <div class="itemBlank"></div>
+                <div class="item1" onClick="insRechner('+',3)">+</div>
+                <div class="item1" onClick="insRechner('omega',3)">&omega;</div>
+                <div class="item1" onClick="insRechner('sin(x)',3)">sin</div>
+                <div class="item1" onClick="insRechner('cos(x)',3)">cos</div>
+                <div class="item1" onClick="insRechner('tan(x)',3)">tan</div>
+
+                <div class="item1" onClick="insRechner('e^(x)',3)">e<sup>x</sup></div>
+                <div class="item1" onClick="insRechner('log(x)',3)">ln</div>
+                <div class="item1" onClick="insRechner('x^a',3)">x<sup>a</sup></div>
+                <div class="item1" onClick="insRechner('a/x',3)"><span class="frac"><sup>a</sup> <span>/</span> <sub>x</sub></span>
+                </div>
+                <div class="item1" onClick="insRechner('^',3)">^</div>
+                <div class="item1" onClick="insRechner('sigma',3)">&sigma;</div>
+                <div class="item1" onClick="insRechner('asin(x)',3)">asin</div>
+                <div class="item1" onClick="insRechner('acos(x)',3)">acos</div>
+                <div class="item1" onClick="insRechner('atan(x)',3)">atan</div>
+
+                <div class="item1" onClick="insRechner('x^2',3)">x<sup>2</sup></div>
+                <div class="item1" onClick="insRechner('sqrt(x)',3)">√<span style="border-top:1px solid">x</span></div>
+                <div class="item1" onClick="insRechner('a^x',3)">a<sup>x</sup></div>
+                <div class="item1" onClick="insRechner('a/(x+b)',3)"><span class="frac"><sup>a</sup> <span>/</span> <sub>x+b</sub></span>
+                </div>
+                <div class="item1" onClick="insRechner('abs(x)',3)">|x|</div>
+                <div class="item1" onClick="insRechner('delta',3)">&delta;</div>
+                <div class="item1" onClick="insRechner('sinh(x)',3)">sinh</div>
+                <div class="item1" onClick="insRechner('cosh(x)',3)">cosh</div>
+                <div class="itemBlank"></div>
+
+                <div class="item2" onClick="insRechner('(a*x+c)/(b*y+c)',3)"><span class="frac"><sup>a&sdot;x+c</sup> <span>/</span> <sub>b&sdot;y+c</sub></span>
+                </div>
+                <div class="item2" onClick="insRechner('(a+x)/(b+z)',3)"><span class="frac"><sup>a+x</sup> <span>/</span> <sub>b+z</sub></span>
+                </div>
+                <div class="item2" onClick="insRechner('(z^2-a^2)/(x^2+a^2)',3)"><span class="frac"><sup>z<sup>2</sup>-a<sup>2</sup></sup><span>/</span> <sub>z<sup>2</sup>+a<sup>2</sup></sub></span>
+                </div>
+                <div class="item2" onClick="insRechner('1/(a+b*x)',3)"><span class="frac"><sup>a</sup> <span>/</span> <sub>x+b</sub></span>
+                </div>
+                <div class="item1" onClick="insRechner('(1+sqrt(y))/(1-sqrt(x))',3)"><span class="frac"><sup>1+√<span style="border-top:1px solid">y</span></sup> <span>/</span> <sub>1-√<span style="border-top:1px solid">y</span></sub></span>
+                </div>
+
+                <div class="item3" onClick="insRechner('e^(x)*sin(y)*cos(z)',3)">e<sup>x</sup>sin(y)cos(z)</div>
+                <div class="item2" onClick="insRechner('sqrt(x+a)',3)">√<span style="border-top:1px solid">x+a</span></div>
+                <div class="item2" onClick="insRechner('sqrt(e^(a*x))',3)">√<span style="border-top:1px solid">e<sup>a&sdot;x</sup></span></div>
+                <div class="itemBlank"></div>
+                <div class="itemBlank"></div>
+
+                <div class="item1" onClick="insRechner('e^(sqrt(x))',3)"><span><math><msup><mi>e</mi><msqrt><mi>x</mi></msqrt></msup></math></span></div>
+                <div class="item2" onClick="insRechner('a*e^(-b*x^2+c)',3)"><span><math><mi>a</mi><msup><mi>e</mi><mrow><mo>-</mo><mi>b</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>c</mi></mrow></msup></math></span></div>
+                <div class="item1" onClick="insRechner('sqrt(e^(a*x))',3)"><span><math><msqrt><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup></msqrt></math></span></div>
+                <div class="item2" onClick="insRechner('(a*e^(b*x+c))',3)"><span><math><mi>a</mi><msup><mi>e</mi><mrow><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi></mrow></msup></math></span></div>
+                <div class="item1" onClick="insRechner('e^(a*x^2)',3)"><span><math><msup><mi>e</mi><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></msup></math></span></div>
+                <div class="item1" onClick="insRechner('1/e^(a*x)',3)"><span><math><mfrac><mrow><mn>1</mn></mrow><mrow><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup></mrow></mfrac></math></span></div>
+                <div class="item1" onClick="insRechner('x/e^(x)',3)"><span><math><mfrac><mrow><mi>x</mi></mrow><mrow><msup><mi>e</mi><mrow><mi>x</mi></mrow></msup></mrow></mfrac></math></span></div>
+            </div>
+            <div class="fktList">
+                <table>
+                    <colgroup>
+                        <col span="1" style="width: 30%;">
+                        <col span="1" style="width: 70%;">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>Function</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <th>sin(x)</th>
+                            <td>Sine of x</td>
+                        </tr>
+                        <tr>
+                            <th>cos(x)</th>
+                            <td>Cosine of x</td>
+                        </tr>
+                        <tr>
+                            <th>tan(x)</th>
+                            <td>Tangent of x</td>
+                        </tr>
+                        <tr>
+                            <th>asin(x)</th>
+                            <td>arcsine</td>
+                        </tr>
+                        <tr>
+                            <th>acos(x)</th>
+                            <td>arccosine of x</td>
+                        </tr>
+                        <tr>
+                            <th>atan(x)</th>
+                            <td>arctangent of x</td>
+                        </tr>
+                        <tr>
+                            <th>atan2(y, x)</th>
+                            <td>Returns the arctangent of the quotient of its arguments.</td>
+                        </tr>
+                        <tr>
+                            <th>cosh(x)</th>
+                            <td>Hyperbolic cosine of x</td>
+                        </tr>
+                        <tr>
+                            <th>sinh(x)</th>
+                            <td>Hyperbolic sine of x</td>
+                        </tr>
+                        <tr>
+                            <th>pow(a, b)</th>
+                            <td>Power a<sup>b</sup></td>
+                        </tr>
+                        <tr>
+                            <th>sqrt(x)</th>
+                            <td>Square root of x</td>
+                        </tr>
+                        <tr>
+                            <th>exp(x)</th>
+                            <td>e-function</td>
+                        </tr>
+                        <tr>
+                            <th>log(x), ln(x)</th>
+                            <td>Natural logarithm</td>
+                        </tr>
+                        <tr>
+                            <th>log(x, b)</th>
+                            <td>Logarithm to base b</td>
+                        </tr>
+                        <tr>
+                            <th>log2(x), lb(x)</th>
+                            <td>Logarithm to base 2</td>
+                        </tr>
+                        <tr>
+                            <th>log10(x), ld(x)</th>
+                            <td>Logarithm to base 10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-2">
+            <h3>Derivation rules in short</h3>
+            <p style="text-align: left"><b>Factor rule: </b> A constant factor is preserved when differentiate</p>
+            <p class="FormelBoxC">
+                <math>
+				<mrow><mo>(</mo><mrow>
+					<mi>a</mi><mo>&sdot;</mo><mi>f</mi>
+				</mrow><mo>)</mo></mrow><mo>&prime;</mo>
+				<mo>=</mo>
+					<mi>a</mi><mo>&sdot;</mo><mi>f</mi><mo>&prime;</mo>
+			</math>
+            </p>
+            <p style="text-align: left"><b>Sum rule: </b> When deriving a sum, the summands can be derived individually</p>
+            <p class="FormelBoxC">
+                <math>
+				<mrow><mo>(</mo><mrow>
+					<msub><mi>f</mi><mn>1</mn></msub>
+					<mo>+</mo>
+					<msub><mi>f</mi><mn>2</mn></msub>
+				</mrow><mo>)</mo></mrow><mo>&prime;</mo>
+				<mo>=</mo>
+					<msub><mi>f</mi><mn>1</mn></msub><mo>&prime;</mo>
+					<mo>+</mo>
+					<msub><mi>f</mi><mn>2</mn></msub><mo>&prime;</mo>
+			</math>
+            </p>
+            <p style="text-align: left"><b>Product rule: </b> Rule for deriving products</p>
+            <p class="FormelBoxC">
+                <math>
+				<mrow><mo>(</mo><mrow>
+					<mi>u</mi><mo>&sdot;</mo><mi>v</mi>
+				</mrow><mo>)</mo></mrow><mo>&prime;</mo>
+				<mo>=</mo>
+					<mi>u</mi><mo>&prime;</mo><mo>&sdot;</mo><mi>v</mi>
+					<mo>+</mo>
+					<mi>u</mi><mo>&sdot;</mo><mi>v</mi><mo>&prime;</mo>
+			</math>
+            </p>
+            <p style="text-align: left"><b>Quotient rule: </b> Rule for deriving quotients</p>
+            <p class="FormelBoxC">
+                <math>
+				<msup><mrow><mo>(</mo><mfrac><mrow>
+					<mi>u</mi>
+					</mrow><mrow>
+					<mi>v</mi>
+				</mrow></mfrac><mo>)</mo></mrow><mo>&prime;</mo></msup>
+				<mo>=</mo>
+				<mfrac><mrow>
+					<msup><mi>u</mi><mo>&prime;</mo></msup><mo>&sdot;</mo><mi>v</mi><mo>-</mo><mi>u</mi><mo>&sdot;</mo><msup><mi>v</mi><mo>&prime;</mo></msup>
+					</mrow><mrow>
+					<msup><mi>v</mi><mn>2</mn></msup>
+				</mrow></mfrac>
+			</math>
+            </p>
+            <p style="text-align: left"><b>Chain rule: </b> Nested functions go into a product of the inner and outer derivatives when differentiated</p>
+            <p class="FormelBoxC">
+                <math>
+				<mrow><mo>(</mo><mrow>
+					<mi>f</mi><mrow><mo>(</mo><mrow><mi>g</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mrow><mo>)</mo></mrow>
+				</mrow><mo>)</mo></mrow><mo>&prime;</mo>
+				<mo>=</mo>
+					<mi>f</mi><mo>&prime;</mo><mrow><mo>(</mo><mi>g</mi><mo>)</mo></mrow><mo>&sdot;</mo><mi>g</mi><mo>&prime;</mo><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow>
+			</math>
+            </p>
+        </div>
+        <div class="box-2">
+            <p>Basic derivatives:</p>
+            <p class="FormelBoxC">
+                <math> 
+			<mrow>
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>Const.</mi>
+			  <mo>=</mo>
+			  <mn>0</mn>
+			</mrow>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			<mrow>
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>x</mi>
+			  <mo>=</mo>
+			  <mn>1</mn>
+			</mrow>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			<mrow>
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <msup><mi>x</mi><mi>n</mi></msup>
+			  <mo>=</mo>
+			  <mi>n</mi><mi>&sdot;</mi><msup><mi>x</mi><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup>
+			</mrow>
+			</math>
+            </p>
+        </div>
+        <div class="box-2">
+            <p>Derivative n-th root:</p>
+            <p class="FormelBoxC">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+				  <mstyle displaystyle="true">
+					<mrow class="MJX-TeXAtom-ORD">
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<mroot><mi>x</mi><mi>n</mi></mroot>
+				<mo>=</mo>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>x</mi><mfrac><mn>1</mn><mi>n</mi></mfrac></msup>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mi>n</mi></mfrac><mo>&sdot;</mo><msup><mi>x</mi><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>-</mo><mn>1</mn></mrow></msup>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mi>n</mi></mfrac><mo>&sdot;</mo><msup><mi>x</mi><mfrac><mrow><mn>1</mn><mo>-</mo><mi>n</mi></mrow><mi>n</mi></mfrac></msup>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mi>n</mi></mfrac><mo>&sdot;</mo><mroot><msup><mi>x</mi><mrow><mn>1</mn><mo>-</mo><mi>n</mi></mrow></msup><mi>n</mi></mroot>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mrow><mi>n</mi><mo>&sdot;</mo><mroot><msup><mi>x</mi><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><mi>n</mi></mroot></mrow></mfrac>
+					</mrow>
+				  </mstyle>
+				</math>
+            </p>
+            <p>Derivation square root:</p>
+            <p class="FormelBoxC">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+				  <mstyle displaystyle="true">
+					<mrow class="MJX-TeXAtom-ORD">
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msqrt><mi>x</mi></msqrt>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mrow><mn>2</mn><mo>&sdot;</mo><msqrt><mi>x</mi></msqrt></mrow></mfrac>
+					</mrow>
+				  </mstyle>
+				</math>
+            </p>
+            <p>Derivation cube root:</p>
+            <p class="FormelBoxC">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+				  <mstyle displaystyle="true">
+					<mrow class="MJX-TeXAtom-ORD">
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<mroot><mi>x</mi><mn>3</mn></mroot>
+				<mo>=</mo>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>x</mi><mfrac><mn>1</mn><mn>3</mn></mfrac></msup>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mn>3</mn></mfrac><mo>&sdot;</mo><msup><mi>x</mi><mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>-</mo><mn>1</mn></mrow></msup>
+				<mo>=</mo>
+				<mfrac><mn>1</mn><mrow><mn>3</mn><mo>&sdot;</mo><mroot><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mn>3</mn></mroot></mrow></mfrac>
+					</mrow>
+				  </mstyle>
+				</math>
+            </p>
+        </div>
+        <div class="box-2">
+            <p>Derivation of trigonometric functions:</p>
+            <p class="FormelBoxC">
+                <math> 
+			<mrow>
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>sin</mi><mn>(</mn><mi>x</mi><mn>)</mn>
+			  <mo>=</mo>
+			  <mi>cos</mi><mn>(</mn><mi>x</mi><mn>)</mn>
+			</mrow>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			<mrow>
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>cos</mi><mn>(</mn><mi>x</mi><mn>)</mn>
+			  <mo>=</mo>
+			  <mo>-</mo><mi>sin</mi><mn>(</mn><mi>x</mi><mn>)</mn>
+			</mrow>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>sin</mi><mn>(</mn><mi>k</mi><mi>x</mi><mn>)</mn>
+			  </math><math><mo>=</mo>
+			  <mi>k</mi><mi>cos</mi><mn>(</mn><mi>k</mi><mi>x</mi><mn>)</mn>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>cos</mi><mn>(</mn><mi>k</mi><mi>x</mi><mn>)</mn>
+			  </math><math><mo>=</mo>
+			  <mo>-</mo><mi>k</mi><mi>sin</mi><mn>(</mn><mi>k</mi><mi>x</mi><mn>)</mn>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+			  <mi>tan</mi><mn>(</mn><mi>x</mi><mn>)</mn>
+			  </math><math><mo>=</mo>
+				 <mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				  </mfrac>
+				 <mfrac>
+					<mrow><mi>sin</mi><mn>(</mn><mi>x</mi><mn>)</mn></mrow>
+					<mrow><mi>cos</mi><mn>(</mn><mi>x</mi><mn>)</mn></mrow>
+				 </mfrac>
+			  </math><math><mo>=</mo>
+			  <mfrac>
+				  <mn>1</mn>
+				  <mrow><msup><mi>cos</mi><mn>2</mn></msup><mn>(</mn><mi>x</mi><mn>)</mn></mrow>
+			  </mfrac>
+			</math>
+            </p>
+            <p>Derivations of the e-function:</p>
+            <p class="FormelBoxC">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+				  <mstyle displaystyle="true">
+					<mrow class="MJX-TeXAtom-ORD">
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>e</mi><mi>x</mi></msup>
+				<mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><mi>x</mi></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				<mo>=</mo>
+				<msup><mi>e</mi><mi>x</mi></msup>
+					</mrow>
+				  </mstyle>
+				</math>
+            </p>
+            <p class="FormelBoxC">
+                <math>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mi>a</mi><msup><mi>e</mi><mrow><mi>a</mi><mi>x</mi></mrow></msup>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>e</mi><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></msup>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mn>2</mn><mi>a</mi><mi>x</mi><msup><mi>e</mi><mrow><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup></mrow></msup>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<mfrac><mn>1</mn><msup><mi>e</mi><mi>x</mi></msup></mfrac>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><mfrac><mn>1</mn><msup><mi>e</mi><mi>x</mi></msup></mfrac><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><mrow><mo>-</mo><mi>x</mi></mrow></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mo>-</mo><msup><mi>e</mi><mrow><mo>-</mo><mi>x</mi></mrow></msup>
+				</math><math><mo>=</mo>
+				<mo>-</mo><mfrac><mn>1</mn><msup><mi>e</mi><mi>x</mi></msup></mfrac>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>e</mi><mrow><mi>ln</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow></msup>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><mrow><mi>ln</mi><mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow></mrow></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><mi>x</mi><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mn>1</mn>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mi>e</mi><msup><mi>x</mi><mi>n</mi></msup></msup>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><msup><mi>x</mi><mi>n</mi></msup></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mi>n</mi><msup><mi>x</mi><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><msup><mi>x</mi><mi>n</mi></msup></msup>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math>
+				<mfrac>
+					<mrow>
+					  <mo>d</mo>
+					</mrow>
+					<mrow>
+					  <mo>d</mo>
+					  <mi>x</mi>
+					</mrow>
+				</mfrac>
+				<msup><mrow><mo>(</mo><msup><mi>e</mi><mi>x</mi></msup><mo>)</mo></mrow><mi>n</mi></msup>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mrow><mo>(</mo><msup><mi>e</mi><mi>x</mi></msup><mo>)</mo></mrow><mi>n</mi></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mrow><mo>(</mo><msup><mi>e</mi><mrow><mi>n</mi><mi>x</mi></mrow></msup><mo>)</mo></mrow><mo>&prime;</mo>
+				</math><math><mo>=</mo>
+				<mi>n</mi><msup><mi>e</mi><mrow><mi>n</mi><mi>x</mi></mrow></msup>
+			</math>
+            </p>
+            <p>Derivation of the logarithm functions:</p>
+            <p class="FormelBoxC">
+                <math> 
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+				<mrow><mi>ln</mi><mn>(</mn><mi>x</mi><mn>)</mn></mrow>
+			  <mo>=</mo>
+				<mfrac><mn>1</mn><mi>x</mi></mfrac>
+			</math>
+            </p>
+            <p class="FormelBoxC">
+                <math> 
+			 <mfrac>
+				<mrow>
+				  <mo>d</mo>
+				</mrow>
+				<mrow>
+				  <mo>d</mo>
+				  <mi>x</mi>
+				</mrow>
+			  </mfrac>
+				<msub><mi>log</mi><mi>a</mi></msub><mn>(</mn><mi>x</mi><mn>)</mn>
+			  <mo>=</mo>
+				<mfrac><mn>1</mn><mi>x</mi></mfrac><msub><mi>log</mi><mi>a</mi></msub><mn>(</mn><mi>e</mi><mn>)</mn>
+			</math>
+            </p>
+        </div>
+        <div class="box-2">
+            <h2>Partial Derivatives</h2>
+            <p>For functions with more than one variables the derivative to one of the variables is called partial derivative.</p>
+            <p>For a function with the variable x and several further variables the partial derivative to x is noted as follows.</p>
+            <p class="FormelBoxC">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+			  <mstyle displaystyle="true">
+				<mrow class="MJX-TeXAtom-ORD">
+				  <mfrac>
+					<mi mathvariant="normal">&#x2202;<!-- ∂ --></mi>
+					<mrow>
+					  <mi mathvariant="normal">&#x2202;<!-- ∂ --></mi>
+					  <mi>x</mi>
+					</mrow>
+				  </mfrac>
+				  <mi>f</mi>
+				  <mo stretchy="false">(</mo>
+				  <mi>x</mi>
+				  <mo>,</mo>
+				  <mi>y</mi>
+				  <mo>,</mo>
+				  <mo>.</mo>
+				  <mo>.</mo>
+				  <mo>.</mo>
+				  <mo stretchy="false">)</mo>
+				</mrow>
+			  </mstyle>
+			</math>
+            </p>
+            <p>For partial derivation, the other variables are treated as constants.</p>
+        </div>
+    </div>
+    <noscript>
+	  <h2>elsenaju Mathematics Tutorial: Derivative Calculator</h2>
+	  <p>Calculator for the derivative, partial derivative and gradient of a function f.</p>
+	</noscript>
+    <script src="program.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.0.0/math.min.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ CommonHTML: { linebreaks: { automatic: true } }, "HTML-CSS": { linebreaks: { automatic: true } }, SVG: { linebreaks: { automatic: true } } });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML" async></script>
+    <script>
+        var Abl1;
+        var Operator = '';
+        var strf = '';
+
+        function insRechner(Tag, sel) {
+            if (sel == 0) {
+                clearArea('odeinputf');
+            } else if (sel == 1) {
+                caretEnd('odeinputf');
+            } else if (sel == 2) {
+                caretPos1('odeinputf');
+            } else {
+                insert(Tag, '', 'odeinputf');
+            }
+        }
+
+        function ok() {
+            strf = '';
+            strf += '<div class="table-row">';
+            strf += '	<div class="table-cell">';
+            strf += '		<p class="FormelBoxL"><math><mi>f</mi><mrow><mo>(</mo><mi>...</mi><mo>)</mo><mo>=</mo></math></p>';
+            strf += '	</div>';
+            strf += '	<div class="table-cell" style="text-align: left;">';
+            strf += '		<p class="FormelBoxL">`' + document.getElementById('odeinputf').value + '`</p>';
+            strf += '	</div>';
+            strf += '</div>';
+            Abl1 = document.getElementById('odeinputf').value;
+            Operator = '';
+            document.getElementById('Ableitung').innerHTML = strf;
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "Ableitung"]);
+        }
+
+        function doIt(v, sel) {
+            var input = document.getElementById('Ableitung');
+            var temp = Abl1;
+            Abl1 = math.derivative(Abl1, v);
+            var str = '';
+            input.innerHTML = '';
+            if (sel == 0) {
+                Operator = '<mfrac><mrow><mo>d</mo></mrow><mrow><mo>d</mo><mi>' + v + '</mi></mrow></mfrac>' + Operator;
+                str += strf;
+                str += '<div class="table-row">';
+                str += '	<div class="table-cell">';
+                str += '		<p class="FormelBoxL"><math>' + Operator + '<mi>f</mi><mrow><mo>(</mo><mi>...</mi><mo>)</mo></mrow><mo>=</mo></msup></math></p>';
+                str += '	</div>';
+                str += '	<div class="table-cell">';
+                str += '		<p class="FormelBoxL" style="float:left;">`' + Abl1 + '`</p>';
+                str += '	</div>';
+                str += '	</div>';
+                input.innerHTML = str;
+                strf = str;
+            } else if (sel == 1) {
+                Operator = '<mfrac><mrow><mo>&part;</mo></mrow><mrow><mo>&part;</mo><mi>' + v + '</mi></mrow></mfrac>' + Operator;
+                str += strf;
+                str += '<div class="table-row">';
+                str += '	<div class="table-cell">';
+                str += '		<p class="FormelBoxL"><math>' + Operator + '<mi>f</mi><mrow><mo>(</mo><mi>...</mi><mo>)</mo></mrow><mo>=</mo></msup></math></p>';
+                str += '	</div>';
+                str += '	<div class="table-cell">';
+                str += '		<p class="FormelBoxL">`' + Abl1 + '`</p>';
+                str += '	</div>';
+                str += '</div>';
+                input.innerHTML = str;
+                strf = str;
+            } else {
+                var Abl2 = math.derivative(temp, 'y');
+                var Abl3 = math.derivative(temp, 'z');
+                str += strf;
+                Operator = '<mfrac><mrow><mo>&part;</mo></mrow><mrow><mo>&part;</mo><mi>' + v + '</mi></mrow></mfrac>' + Operator;
+                str += '<div class="table-row">';
+                str += '<div class="table-cell" style="vertical-align: middle;"><p class="FormelBoxL" style="float:left;"><math><math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true"><mrow class="MJX-TeXAtom-ORD"><mi>g</mi><mi>r</mi><mi>a</mi><mi>d</mi><mo stretchy="false">(</mo><mi>f</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">&#x2207;</mi><mi>f</mi><mo>=</mo><mrow><mo>(</mo><mtable rowspacing="4pt" columnspacing="1em"><mtr><mtd><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>f</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>x</mi></mrow></mfrac></mtd></mtr><mtr><mtd><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>f</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>y</mi></mrow></mfrac></mtd></mtr><mtr><mtd><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>f</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>z</mi></mrow></mfrac></mtd></mtr></mtable><mo>)</mo></mrow><mo>=</mo></mrow></mstyle></math></math></p></div>';
+                str += '<div class="table-cell"><p class="FormelBoxL" style="float:left;"><table class="matrixK">';
+                str += '<tr><td>`' + Abl1 + '`</td></tr><tr><td><p class="FormelBoxL"> </p></td></tr><tr><td>`' + Abl2 + '`</td></tr><tr><td><p class="FormelBoxL"> </p></td></tr><tr><td>`' + Abl3 + '`</td></tr>';
+                str += '</table></div></div>';
+                input.innerHTML = str;
+                strf = str;
+            }
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "Ableitung"]);
+        }
+    </script>
+</body>
+
+</html>
